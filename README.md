@@ -27,9 +27,8 @@ npm run dev
 
 ## Activos que debes agregar tú
 El repositorio no incluye binarios de medios (para evitar subir JPG/PNG/MP3). Añádelos manualmente:
-- `public/background-castle.jpg` (o `background-castle.png`): fondo principal horizontal (recomendado 1920x1080 o superior). Si no ves el fondo, revisa que el nombre del archivo coincida exactamente.
-- `public/background-castle-vertical.jpg`: versión vertical para móviles; se usa automáticamente en pantallas angostas/retrato para que no quede tapado por el contador (ideal 1080x1920 o similar).
-- `public/confetti.png`: textura transparente de brillo/confeti (ej. PNG de 300–600px con espacios transparentes para verse ligero). Usa un patrón con muchos confetis pequeños dispersos (no solo uno) para que el `background-repeat` y la animación den sensación de lluvia de confeti; si más adelante prefieres un efecto tipo **confetti.js** puedes integrarlo en el frontend, pero con este tile estático ya se ve sutil.
+- `public/background-castle.jpg` (o `background-castle.png`): fondo principal (recomendado 1920x1080 o superior). Si no ves el fondo, revisa que el nombre del archivo coincida exactamente.
+- `public/confetti.png`: textura transparente de brillo/confeti (ej. PNG de 300–600px con espacios transparentes para verse ligero). Usa patrones finos (muchos pequeños destellos) para que el repeat animado se vea como confeti cayendo; si prefieres confeti animado tipo confetti.js podrías integrarlo después en el frontend, pero por ahora basta con este tile estático.
 - `public/ambient-magic.mp3`: pista de música ambiental opcional (loop). La música arranca automáticamente; puedes silenciarla en Ajustes.
 - `public/icons/icon-192.png`, `public/icons/icon-512.png`: íconos PWA en PNG cuadrados.
 
