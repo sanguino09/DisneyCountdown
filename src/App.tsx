@@ -18,7 +18,7 @@ type BeforeInstallPromptEvent = Event & {
 function App() {
   const [language, setLanguage] = useState<Language>('es');
   const [timezone, setTimezone] = useState(TARGET_ZONE_DEFAULT);
-  const [isMusicOn, setIsMusicOn] = useState(false);
+  const [isMusicOn, setIsMusicOn] = useState(true);
   const [notificationPermission, setNotificationPermission] = useState<
     NotificationPermission | 'unsupported'
   >('default');

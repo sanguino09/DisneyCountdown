@@ -27,9 +27,9 @@ npm run dev
 
 ## Activos que debes agregar tú
 El repositorio no incluye binarios de medios (para evitar subir JPG/PNG/MP3). Añádelos manualmente:
-- `public/background-castle.jpg`: fondo principal (recomendado 1920x1080 o superior). Puedes usar JPG o PNG.
-- `public/confetti.png`: textura de brillo/confeti transparente.
-- `public/ambient-magic.mp3`: pista de música ambiental opcional (loop).
+- `public/background-castle.jpg` (o `background-castle.png`): fondo principal (recomendado 1920x1080 o superior). Si no ves el fondo, revisa que el nombre del archivo coincida exactamente.
+- `public/confetti.png`: textura transparente de brillo/confeti (ej. PNG de 300–600px con espacios transparentes para verse ligero).
+- `public/ambient-magic.mp3`: pista de música ambiental opcional (loop). La música arranca automáticamente; puedes silenciarla en Ajustes.
 - `public/icons/icon-192.png`, `public/icons/icon-512.png`: íconos PWA en PNG cuadrados.
 
 Consulta `public/ASSETS_PLACEHOLDER.md` para un resumen rápido de qué subir.
