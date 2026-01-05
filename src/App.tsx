@@ -29,6 +29,7 @@ function App() {
   const notifiedMilestones = useRef<Set<string>>(new Set());
 
   const t = translations[language];
+  const installReady = !!deferredPrompt || canInstall;
 
   useEffect(() => {
     if (!('Notification' in window)) {
@@ -145,35 +146,6 @@ function App() {
             {t.heading}
           </h1>
           <p className="subtitle">{t.subtitle}</p>
-
-          {showSettings && (
-            <div className="controls" aria-label="Configuraciones">
-              <LanguageSelector
-                value={language}
-                onChange={setLanguage}
-                ariaLabel={t.languageLabel}
-              />
-              <TimezoneSelect
-                value={timezone}
-                onChange={(value) => {
-                  setTimezone(value);
-                  notifiedMilestones.current.clear();
-                }}
-                ariaLabel={ariaLabels.timezone}
-              />
-              <button
-                className="pill"
-                onClick={() => setIsMusicOn((prev) => !prev)}
-                aria-pressed={isMusicOn}
-                aria-label={ariaLabels.music}
-              >
-                {isMusicOn ? '🔊 ' : '🔇 '} {t.musicLabel}
-              </button>
-              <span className="pill status" aria-label={ariaLabels.notifications}>
-                {notificationPermission === 'granted' ? '🔔 On' : '🔕 Off'}
-              </span>
-            </div>
-          )}
         </header>
 
         <section id="countdown" className="panel" aria-label={t.countdownLabel}>
@@ -191,11 +163,13 @@ function App() {
               className="cta secondary icon"
               onClick={installApp}
               aria-label={t.installApp}
+              disabled={!installReady}
+              title={!installReady ? t.installFallback : undefined}
             >
-              📱
+              ⬇️
             </button>
             <button className="cta" onClick={shareMagic} aria-label={t.share}>
-              📤
+              🔗
             </button>
           </div>
           {showSettings && (
