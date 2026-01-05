@@ -1,4 +1,4 @@
-const CACHE_NAME = 'disney-countdown-cache-v2';
+const CACHE_NAME = 'disney-countdown-cache-v3';
 const OFFLINE_URLS = [
   './',
   'index.html',
@@ -6,10 +6,8 @@ const OFFLINE_URLS = [
   'icons/icon-192.png',
   'icons/icon-512.png',
   'background-castle.jpg',
-  'background-castle.png',
   'background-castle-vertical.jpg',
-  'background-castle-vertical.png',
-  'confetti.png'
+  'ambient-magic.mp3'
 ];
 const ASSET_PATTERN = /"(assets\/[^"]+\.(?:js|css))"/g;
 

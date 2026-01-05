@@ -5,10 +5,11 @@ import { LanguageSelector } from './components/LanguageSelector';
 import { TimezoneSelect } from './components/TimezoneSelect';
 import { Language, translations } from './i18n';
 import { getTargetDate, TARGET_ZONE_DEFAULT } from './utils/time';
+import { withBase } from './utils/assetBase';
 
 const SHARE_URL = typeof window !== 'undefined' ? window.location.href : '';
 
-const audioSrc = '/ambient-magic.mp3';
+const audioSrc = withBase('ambient-magic.mp3');
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
