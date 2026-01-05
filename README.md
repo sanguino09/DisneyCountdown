@@ -1,6 +1,6 @@
 # Disney Countdown
 
-Una experiencia mágica en React + TypeScript que cuenta hacia el **25 de febrero de 2026 a las 09:30** (zona horaria configurable, por defecto Europe/Paris). Incluye tema Disney, PWA, animaciones, selector de idioma y opción de música ambiental (accesibles desde el botón de **Ajustes**).
+Una experiencia mágica en React + TypeScript que cuenta hacia el **25 de febrero de 2026 a las 09:30** (zona horaria configurable, por defecto Europe/Paris). Incluye tema Disney, PWA, animaciones, selector de idioma y opción de música ambiental (accesibles desde el botón de **Ajustes** en la barra de acciones).
 
 ## Configuración
 
@@ -38,7 +38,7 @@ Consulta `public/ASSETS_PLACEHOLDER.md` para un resumen rápido de qué subir.
 - **Cuenta regresiva animada** con Framer Motion y tema Disney.
 - **Zona horaria configurable** (selector con opciones comunes, dentro de Ajustes).
 - **Selector de idioma**: Español, Inglés y Francés (dentro de Ajustes).
-- **CTA de compartir** usando Web Share API (o copia al portapapeles como fallback) y botón para **descargar en el móvil** (prompt de instalación PWA o indicación de añadir a inicio).
+- **CTA de compartir** usando Web Share API (o copia al portapapeles como fallback) y botón para **descargar en el móvil** (prompt de instalación PWA o indicación de añadir a inicio). Ambos están junto al botón de Ajustes como íconos.
 - **Música ambiental** con toggle accesible (dentro de Ajustes).
 - **PWA**: manifest, service worker y meta tags para instalación.
 - **Notificaciones locales**: solicita permiso al cargar y avisa en hitos de 30 días, 1 día y 1 hora.

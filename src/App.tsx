@@ -118,10 +118,9 @@ function App() {
       await deferredPrompt.userChoice;
       setDeferredPrompt(null);
       setCanInstall(false);
-      return;
+    } else {
+      alert(t.installFallback);
     }
-
-    alert(t.installFallback);
   };
 
   const ariaLabels = useMemo(
@@ -142,16 +141,6 @@ function App() {
       <div className="sparkles" role="presentation" />
       <main className="shell">
         <header className="hero">
-          <div className="hero-actions">
-            <button
-              className="pill"
-              onClick={() => setShowSettings((prev) => !prev)}
-              aria-expanded={showSettings}
-              aria-label={t.settings}
-            >
-              ⚙️ {t.settings}
-            </button>
-          </div>
           <h1 className="title" aria-label={t.heading}>
             {t.heading}
           </h1>
@@ -191,17 +180,52 @@ function App() {
           <Countdown language={language} timezone={timezone} />
           <div className="cta-row">
             <button
-              className="cta secondary"
+              className="cta icon"
+              onClick={() => setShowSettings((prev) => !prev)}
+              aria-label={t.settings}
+              aria-expanded={showSettings}
+            >
+              ⚙️
+            </button>
+            <button
+              className="cta secondary icon"
               onClick={installApp}
               aria-label={t.installApp}
-              disabled={!canInstall && !deferredPrompt}
             >
-              📱 {t.installApp}
+              📱
             </button>
             <button className="cta" onClick={shareMagic} aria-label={t.share}>
-              📤 {t.share}
+              📤
             </button>
           </div>
+          {showSettings && (
+            <div className="controls" aria-label="Configuraciones">
+              <LanguageSelector
+                value={language}
+                onChange={setLanguage}
+                ariaLabel={t.languageLabel}
+              />
+              <TimezoneSelect
+                value={timezone}
+                onChange={(value) => {
+                  setTimezone(value);
+                  notifiedMilestones.current.clear();
+                }}
+                ariaLabel={ariaLabels.timezone}
+              />
+              <button
+                className="pill"
+                onClick={() => setIsMusicOn((prev) => !prev)}
+                aria-pressed={isMusicOn}
+                aria-label={ariaLabels.music}
+              >
+                {isMusicOn ? '🔊 ' : '🔇 '} {t.musicLabel}
+              </button>
+              <span className="pill status" aria-label={ariaLabels.notifications}>
+                {notificationPermission === 'granted' ? '🔔 On' : '🔕 Off'}
+              </span>
+            </div>
+          )}
         </section>
       </main>
 
