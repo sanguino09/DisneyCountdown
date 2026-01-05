@@ -8,7 +8,8 @@
   --text: #f5f7fb;
   --muted: #c7d4ed;
   --glow: 0 0 30px rgba(255, 209, 102, 0.35);
-  --asset-base: /;
+  --background-image-desktop: none;
+  --background-image-mobile: none;
   --font-body: 'Montserrat', system-ui, -apple-system, sans-serif;
   --font-display: 'Parisienne', 'Montserrat', system-ui, sans-serif;
 }
@@ -34,8 +35,7 @@ body {
 .background {
   position: absolute;
   inset: 0;
-  background-image: url(var(--asset-base)background-castle.jpg), url(var(--asset-base)background-castle.png),
-    var(--bg);
+  background-image: var(--background-image-desktop), var(--bg);
   background-size: cover;
   background-position: center;
   filter: brightness(0.9) saturate(1.05);
@@ -45,9 +45,11 @@ body {
 .sparkles {
   position: absolute;
   inset: 0;
-  background-image: url(var(--asset-base)confetti.png);
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18) 0, transparent 35%),
+    radial-gradient(circle at 70% 30%, rgba(255, 209, 102, 0.16) 0, transparent 40%),
+    radial-gradient(circle at 40% 80%, rgba(255, 125, 255, 0.14) 0, transparent 32%);
   background-repeat: repeat;
-  background-size: 320px;
+  background-size: 320px 320px, 280px 280px, 260px 260px;
   opacity: 0.18;
   animation: float 18s linear infinite;
 }
@@ -241,8 +243,7 @@ body {
   }
 
   .background {
-    background-image: url(var(--asset-base)background-castle-vertical.jpg),
-      url(var(--asset-base)background-castle-vertical.png), var(--bg);
+    background-image: var(--background-image-mobile), var(--bg);
     background-position: center top;
   }
 
