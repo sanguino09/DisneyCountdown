@@ -29,7 +29,6 @@ function App() {
   const notifiedMilestones = useRef<Set<string>>(new Set());
 
   const t = translations[language];
-  const installReady = !!deferredPrompt || canInstall;
 
   useEffect(() => {
     if (!('Notification' in window)) {
@@ -119,8 +118,6 @@ function App() {
       await deferredPrompt.userChoice;
       setDeferredPrompt(null);
       setCanInstall(false);
-    } else {
-      alert(t.installFallback);
     }
   };
 
@@ -163,8 +160,6 @@ function App() {
               className="cta secondary icon"
               onClick={installApp}
               aria-label={t.installApp}
-              disabled={!installReady}
-              title={!installReady ? t.installFallback : undefined}
             >
               ⬇️
             </button>
