@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DateTime } from 'luxon';
 import Countdown from './components/Countdown';
 import { LanguageSelector } from './components/LanguageSelector';
@@ -80,18 +80,35 @@ function App() {
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
+  const startMusic = useCallback(() => {
+    if (!audioRef.current) return;
+    audioRef.current.volume = 0.4;
+    audioRef.current.loop = true;
+    audioRef.current.play().catch(() => setIsMusicOn(false));
+  }, []);
+
   useEffect(() => {
     if (!audioRef.current) return;
 
     if (isMusicOn) {
-      audioRef.current.volume = 0.4;
-      audioRef.current.loop = true;
-      audioRef.current.play().catch(() => setIsMusicOn(false));
+      startMusic();
     } else {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
-  }, [isMusicOn]);
+  }, [isMusicOn, startMusic]);
+
+  useEffect(() => {
+    const unlock = () => {
+      if (isMusicOn) startMusic();
+    };
+    window.addEventListener('pointerdown', unlock, { once: true });
+    window.addEventListener('keydown', unlock, { once: true });
+    return () => {
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+  }, [isMusicOn, startMusic]);
 
   const shareMagic = async () => {
     const shareData = {
@@ -153,6 +170,7 @@ function App() {
               onClick={() => setShowSettings((prev) => !prev)}
               aria-label={t.settings}
               aria-expanded={showSettings}
+              title={t.settings}
             >
               ⚙️
             </button>
@@ -160,10 +178,11 @@ function App() {
               className="cta secondary icon"
               onClick={installApp}
               aria-label={t.installApp}
+              title={t.installApp}
             >
               ⬇️
             </button>
-            <button className="cta" onClick={shareMagic} aria-label={t.share}>
+            <button className="cta" onClick={shareMagic} aria-label={t.share} title={t.share}>
               🔗
             </button>
           </div>
@@ -198,7 +217,7 @@ function App() {
         </section>
       </main>
 
-      <audio ref={audioRef} src={audioSrc} aria-hidden="true" />
+      <audio ref={audioRef} src={audioSrc} aria-hidden="true" autoPlay playsInline />
     </div>
   );
 }

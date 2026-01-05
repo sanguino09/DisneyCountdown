@@ -33,7 +33,7 @@ body {
 .background {
   position: absolute;
   inset: 0;
-  background-image: var(--bg), url('/background-castle.jpg'), url('/background-castle.png');
+  background-image: url('/background-castle.jpg'), url('/background-castle.png'), var(--bg);
   background-size: cover;
   background-position: center;
   filter: brightness(0.9) saturate(1.05);
