@@ -40,22 +40,6 @@ body {
   z-index: 0;
 }
 
-@media (orientation: portrait) {
-  .background {
-    background-image: url('/background-castle-vertical.jpg'), url('/background-castle.jpg'),
-      url('/background-castle.png'), var(--bg);
-    background-position: center top;
-  }
-}
-
-@media (max-width: 900px) {
-  .background {
-    background-image: url('/background-castle-vertical.jpg'), url('/background-castle.jpg'),
-      url('/background-castle.png'), var(--bg);
-    background-position: center top;
-  }
-}
-
 .sparkles {
   position: absolute;
   inset: 0;
