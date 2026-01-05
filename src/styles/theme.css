@@ -63,16 +63,9 @@ body {
   padding-top: 1rem;
 }
 
-.tag {
-  display: inline-block;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  background: rgba(255, 209, 102, 0.12);
-  color: var(--accent);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.85rem;
+.hero-actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .title {
@@ -94,7 +87,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 0;
 }
 
 .pill {
@@ -184,6 +177,7 @@ body {
 .cta-row {
   display: flex;
   justify-content: center;
+  gap: 0.8rem;
   margin-top: 1.5rem;
 }
 
@@ -198,6 +192,18 @@ body {
   cursor: pointer;
   box-shadow: 0 20px 40px rgba(255, 125, 255, 0.25);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta.secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.cta.secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .cta:hover,

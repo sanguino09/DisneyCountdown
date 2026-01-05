@@ -10,6 +10,11 @@ const SHARE_URL = typeof window !== 'undefined' ? window.location.href : '';
 
 const audioSrc = '/ambient-magic.mp3';
 
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+};
+
 function App() {
   const [language, setLanguage] = useState<Language>('es');
   const [timezone, setTimezone] = useState(TARGET_ZONE_DEFAULT);
@@ -17,6 +22,9 @@ function App() {
   const [notificationPermission, setNotificationPermission] = useState<
     NotificationPermission | 'unsupported'
   >('default');
+  const [showSettings, setShowSettings] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [canInstall, setCanInstall] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const notifiedMilestones = useRef<Set<string>>(new Set());
 
@@ -62,6 +70,17 @@ function App() {
   }, [notificationPermission, t, timezone]);
 
   useEffect(() => {
+    const handler = (event: Event) => {
+      event.preventDefault();
+      setDeferredPrompt(event as BeforeInstallPromptEvent);
+      setCanInstall(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  useEffect(() => {
     if (!audioRef.current) return;
 
     if (isMusicOn) {
@@ -76,8 +95,8 @@ function App() {
 
   const shareMagic = async () => {
     const shareData = {
-      title: 'Cuenta regresiva Disney',
-      text: t.magicLine,
+      title: 'Disney Countdown',
+      text: t.shareSubtitle,
       url: SHARE_URL
     };
 
@@ -91,6 +110,18 @@ function App() {
     } catch (error) {
       console.error('Error sharing', error);
     }
+  };
+
+  const installApp = async () => {
+    if (deferredPrompt) {
+      await deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      setDeferredPrompt(null);
+      setCanInstall(false);
+      return;
+    }
+
+    alert(t.installFallback);
   };
 
   const ariaLabels = useMemo(
@@ -111,45 +142,64 @@ function App() {
       <div className="sparkles" role="presentation" />
       <main className="shell">
         <header className="hero">
-          <p className="tag">{t.magicLine}</p>
+          <div className="hero-actions">
+            <button
+              className="pill"
+              onClick={() => setShowSettings((prev) => !prev)}
+              aria-expanded={showSettings}
+              aria-label={t.settings}
+            >
+              ⚙️ {t.settings}
+            </button>
+          </div>
           <h1 className="title" aria-label={t.heading}>
             {t.heading}
           </h1>
           <p className="subtitle">{t.subtitle}</p>
 
-          <div className="controls" aria-label="Configuraciones">
-            <LanguageSelector
-              value={language}
-              onChange={setLanguage}
-              ariaLabel={t.languageLabel}
-            />
-            <TimezoneSelect
-              value={timezone}
-              onChange={(value) => {
-                setTimezone(value);
-                notifiedMilestones.current.clear();
-              }}
-              ariaLabel={ariaLabels.timezone}
-            />
-            <button
-              className="pill"
-              onClick={() => setIsMusicOn((prev) => !prev)}
-              aria-pressed={isMusicOn}
-              aria-label={ariaLabels.music}
-            >
-              {isMusicOn ? '🔊 ' : '🔇 '} {t.musicLabel}
-            </button>
-            <span className="pill status" aria-label={ariaLabels.notifications}>
-              {notificationPermission === 'granted' ? '🔔 On' : '🔕 Off'}
-            </span>
-          </div>
+          {showSettings && (
+            <div className="controls" aria-label="Configuraciones">
+              <LanguageSelector
+                value={language}
+                onChange={setLanguage}
+                ariaLabel={t.languageLabel}
+              />
+              <TimezoneSelect
+                value={timezone}
+                onChange={(value) => {
+                  setTimezone(value);
+                  notifiedMilestones.current.clear();
+                }}
+                ariaLabel={ariaLabels.timezone}
+              />
+              <button
+                className="pill"
+                onClick={() => setIsMusicOn((prev) => !prev)}
+                aria-pressed={isMusicOn}
+                aria-label={ariaLabels.music}
+              >
+                {isMusicOn ? '🔊 ' : '🔇 '} {t.musicLabel}
+              </button>
+              <span className="pill status" aria-label={ariaLabels.notifications}>
+                {notificationPermission === 'granted' ? '🔔 On' : '🔕 Off'}
+              </span>
+            </div>
+          )}
         </header>
 
         <section id="countdown" className="panel" aria-label={t.countdownLabel}>
           <Countdown language={language} timezone={timezone} />
           <div className="cta-row">
+            <button
+              className="cta secondary"
+              onClick={installApp}
+              aria-label={t.installApp}
+              disabled={!canInstall && !deferredPrompt}
+            >
+              📱 {t.installApp}
+            </button>
             <button className="cta" onClick={shareMagic} aria-label={t.share}>
-              🚀 {t.share}
+              📤 {t.share}
             </button>
           </div>
         </section>

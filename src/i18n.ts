@@ -3,9 +3,12 @@ export type Language = 'es' | 'en' | 'fr';
 export const translations: Record<Language, {
   heading: string;
   subtitle: string;
-  magicLine: string;
+  shareSubtitle: string;
   share: string;
   copied: string;
+  installApp: string;
+  installFallback: string;
+  settings: string;
   notificationTitle: string;
   milestones: Record<'30d' | '1d' | '1h', string>;
   countdownLabel: string;
@@ -17,11 +20,14 @@ export const translations: Record<Language, {
   units: Record<'days' | 'hours' | 'minutes' | 'seconds', string>;
 }> = {
   es: {
-    heading: 'Cuenta regresiva mágica',
+    heading: 'Disney Countdown',
     subtitle: 'Camino al 25 de febrero de 2026 - 09:30',
-    magicLine: '✨ Donde los sueños despiertan la imaginación ✨',
-    share: 'Compartir la magia',
+    shareSubtitle: 'Comparte la emoción y vive la magia de Disney.',
+    share: 'Compartir',
     copied: 'Enlace copiado. ¡Comparte la magia!',
+    installApp: 'Descargar en el móvil',
+    installFallback: 'Añade a tu pantalla de inicio desde el navegador para instalar.',
+    settings: 'Ajustes',
     notificationTitle: 'Recordatorio mágico',
     milestones: {
       '30d': '¡Solo faltan 30 días para el gran momento Disney!',
@@ -42,11 +48,14 @@ export const translations: Record<Language, {
     }
   },
   en: {
-    heading: 'Magical Countdown',
+    heading: 'Disney Countdown',
     subtitle: 'On the way to Feb 25, 2026 - 09:30',
-    magicLine: '✨ Where dreams awaken imagination ✨',
-    share: 'Share the magic',
+    shareSubtitle: 'Share the excitement and enjoy the Disney magic.',
+    share: 'Share',
     copied: 'Link copied. Share the magic!',
+    installApp: 'Download on mobile',
+    installFallback: 'Add to home screen from your browser to install.',
+    settings: 'Settings',
     notificationTitle: 'Magical reminder',
     milestones: {
       '30d': 'Only 30 days left until the Disney moment!',
@@ -67,11 +76,14 @@ export const translations: Record<Language, {
     }
   },
   fr: {
-    heading: 'Compte à rebours magique',
+    heading: 'Disney Countdown',
     subtitle: 'En route vers le 25 février 2026 - 09:30',
-    magicLine: '✨ Là où les rêves éveillent l\'imagination ✨',
-    share: 'Partager la magie',
+    shareSubtitle: 'Partage l’enthousiasme et profite de la magie Disney.',
+    share: 'Partager',
     copied: 'Lien copié. Partage la magie !',
+    installApp: 'Télécharger sur mobile',
+    installFallback: 'Ajoute à ton écran d’accueil depuis le navigateur pour installer.',
+    settings: 'Réglages',
     notificationTitle: 'Rappel magique',
     milestones: {
       '30d': 'Plus que 30 jours avant l\'instant Disney !',
