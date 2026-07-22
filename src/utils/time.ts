@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-export const TARGET_ISO = '2026-02-25T09:30:00';
+export const TARGET_ISO = '2026-10-31T09:30:00';
 export const TARGET_ZONE_DEFAULT = 'Europe/Paris';
 
 export function getTargetDate(zone = TARGET_ZONE_DEFAULT) {
