@@ -21,7 +21,7 @@ export const translations: Record<Language, {
 }> = {
   es: {
     heading: 'Disney Countdown',
-    subtitle: 'Camino al 25 de febrero de 2026',
+    subtitle: 'Camino al 31 de octubre de 2026',
     shareSubtitle: 'Comparte la emoción y vive la magia de Disney.',
     share: 'Compartir',
     copied: 'Enlace copiado. ¡Comparte la magia!',
@@ -49,7 +49,7 @@ export const translations: Record<Language, {
   },
   en: {
     heading: 'Disney Countdown',
-    subtitle: 'On the way to Feb 25, 2026',
+    subtitle: 'On the way to Oct 31, 2026',
     shareSubtitle: 'Share the excitement and enjoy the Disney magic.',
     share: 'Share',
     copied: 'Link copied. Share the magic!',
@@ -77,7 +77,7 @@ export const translations: Record<Language, {
   },
   fr: {
     heading: 'Disney Countdown',
-    subtitle: 'En route vers le 25 février 2026',
+    subtitle: 'En route vers le 31 octobre 2026',
     shareSubtitle: 'Partage l’enthousiasme et profite de la magie Disney.',
     share: 'Partager',
     copied: 'Lien copié. Partage la magie !',
